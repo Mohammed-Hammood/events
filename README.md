@@ -1,5 +1,9 @@
-#Create by `create-react-app`
-
+# About the app:
+- Create by `create-react-app`
+- Stack:
+  - `Frontend` React, TypeScript, Sass, Styled-components, Redux/toolkit, Swiper,
+  - `Backend` Node.js, Express.js
+    
 # How to run the app locally?
 - Clone the repository to your local machine
 - Install the dependances `yarn install`
