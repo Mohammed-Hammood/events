@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CategoryButton, SwiperElement, Loader, ICON } from "components";
 import { CSSTransition } from "react-transition-group";
 import "styles/transition.scss";
@@ -9,8 +9,8 @@ import { useFetch } from "hooks";
 import { CategoryTypes } from "types";
 import { categories } from "utils/categories";
 
+
 export default function HomePage(): JSX.Element {
-    const events = useSelector(selectEventsByFilter);
     const { activeCategory } = useSelector(selectEvents)
     const { loading } = useFetch();
     const [startYear, setStartYear] = useState<number>(2016);
@@ -20,35 +20,14 @@ export default function HomePage(): JSX.Element {
     const [degree, setDegree] = useState<number>(
         360 - (360 / categories.length) * categories.length + 360 / categories.length
     );
-    const nodeRef = useRef(null);
-
-    const categoryHandler = (category: CategoryTypes): void => {
-        dispatch(setActiveCategory({ category }))
-
-    };
-
-    const updateYears = useCallback(() => {
-        //destruct the useRef hook which saves the start and end events years.
-        const { startYear: startY, endYear: endY } = activeCategory;
-
-        const time = 300 / Math.abs(startY - startYear);
-
-        let interval = setTimeout(() => {
-
-            if (startY !== startYear) setStartYear(y => y > startY ? y - 1 : y + 1);
-
-            if (endY !== endYear) setEndYear(y => y > endY ? y - 1 : y + 1);
-        }, time);
-
-        return () => clearTimeout(interval);
-
-    }, [endYear, activeCategory, startYear]);
+    const nodeRef = useRef(null); //to avoid defaulting to ReactDOM.findDOMNode, which is deprecated in StrictMode 
+    const events = useSelector(selectEventsByFilter);
 
     const getCategoryButtonDegree = ({ index }: { index: number }): number => {
         if (index === 0) return degree
         let newDegree = degree;
         for (let i = 0; i < index; i++) {
-            newDegree += 356 / categories.length;   
+            newDegree += 356 / categories.length;
         }
         return newDegree;
     }
@@ -60,17 +39,32 @@ export default function HomePage(): JSX.Element {
         }
     }
     useEffect(() => {
+        const updateYears = () => {
+            //destruct the useRef hook which saves the start and end events years.
+            const { startYear: startY, endYear: endY } = activeCategory;
+
+            const time = 300 / Math.abs(startY - startYear);
+
+            let interval = setTimeout(() => {
+
+                if (startY !== startYear) setStartYear(y => y > startY ? y - 1 : y + 1);
+
+                if (endY !== endYear) setEndYear(y => y > endY ? y - 1 : y + 1);
+            }, time);
+
+            return () => clearTimeout(interval);
+
+        };
         updateYears();
-    }, [events, startYear, activeCategory, endYear]);
 
-    useEffect(() => {
-        setInProp(false)
-    }, [inProp, setInProp]);
-
-    useEffect(() => {
-        const r = 389.4 - (358 / categories.length) * activeCategory.id +  (358 / categories.length);
+        const r = 389.4 - (358 / categories.length) * activeCategory.id + (358 / categories.length);
         setDegree(r);
-    }, [events.length, setDegree, activeCategory]);
+
+        setInProp(false)
+
+    }, [inProp, setInProp, events, startYear, activeCategory, endYear, setEndYear, setStartYear, setDegree]);
+
+
     if (loading) return (<Loader size={100} />)
     return (
         <main>
@@ -93,8 +87,8 @@ export default function HomePage(): JSX.Element {
                                             key={item.id}
                                             degree={getCategoryButtonDegree({ index })}
                                             category={item}
-                                            setCategory={categoryHandler}
-                                            {...{startYear }}
+                                            setCategory={(category: CategoryTypes) => dispatch(setActiveCategory({ category }))}
+                                            {...{ startYear }}
                                         />
                                     );
                                 })}
@@ -122,8 +116,8 @@ export default function HomePage(): JSX.Element {
                     <div className={"card__swiper"}>
                         {events.length > 0 && <CSSTransition
                             nodeRef={nodeRef}
-                            in={inProp}
                             timeout={300}
+                            in={inProp}
                             classNames={"card__swiper"}
                         >
                             {activeCategory && (

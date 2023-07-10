@@ -1,44 +1,48 @@
 .dialog-enter {
-  opacity: 0.01;
-  transform: scale(1.1);
+	opacity: 0.01;
+	transform: scale(1.1);
 }
 
 .dialog-enter-active {
-    opacity: 1;
-    transform: scale(1);
-    transition: all 300ms;
+	opacity: 1;
+	transform: scale(1);
+	transition: all 300ms;
 }
 
 .dialog-exit {
-  opacity: 1;
-  transform: scale(1);
+	opacity: 1;
+	transform: scale(1);
 }
 
 .dialog-exit-active {
-  opacity: 0.01;
-  transform: scale(1.1);
-  transition: all 300ms;
+	opacity: 0.01;
+	transform: scale(1.1);
+	transition: all 300ms;
 }
+
 // .my-node{
 //     opacity: 0.2;
 // }
 .my-node-enter {
-   opacity: .1;
-  transform: scale(.1);
-  transition: all 1100ms;
+	opacity: .1;
+	transform: scale(.1);
+	transition: all 1100ms;
 }
+
 .my-node-enter-active {
-   opacity: .1;
-    transform: scale(1);
-    transition: all 1100ms;
+	opacity: .1;
+	transform: scale(1);
+	transition: all 1100ms;
 }
+
 .my-node-exit {
-  opacity: .2;
-//   transform: scale(1);
-//   transition: all 100ms;
+	opacity: .2;
+	//   transform: scale(1);
+	//   transition: all 100ms;
 }
+
 .my-node-exit-active {
-  opacity: 1;
-//   transform: scale(.9);
-  transition: all 600ms;
+	opacity: 1;
+	//   transform: scale(.9);
+	transition: all 600ms;
 }
