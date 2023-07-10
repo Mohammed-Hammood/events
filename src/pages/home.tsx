@@ -64,7 +64,6 @@ export default function HomePage(): JSX.Element {
 
     }, [inProp, setInProp, events, startYear, activeCategory, endYear, setEndYear, setStartYear, setDegree]);
 
-
     if (loading) return (<Loader size={100} />)
     return (
         <main>
