@@ -1,7 +1,7 @@
 # About the app:
 - Create by `create-react-app`
 - React app fetches events from API in Express.js
-- The app is deployed on (https:/events-history.vercel.app)
+- The app is deployed on [https://events-history.vercel.app](https://events-history.vercel.app)
 - Stack:
   - `Frontend` React, TypeScript, Sass, Styled-components, Redux/toolkit, Swiper,
   - `Backend` Node.js, Express.js
