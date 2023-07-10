@@ -1,5 +1,6 @@
 # About the app:
 - Create by `create-react-app`
+- React app fetches events from API in Express.js 
 - Stack:
   - `Frontend` React, TypeScript, Sass, Styled-components, Redux/toolkit, Swiper,
   - `Backend` Node.js, Express.js
