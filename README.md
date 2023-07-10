@@ -1,6 +1,18 @@
-# Getting Started with Create React App
+# About the app:
+- Create by `create-react-app`
+- React app fetches events from API in Express.js
+- The app is deployed on [https://events-history.vercel.app](https://events-history.vercel.app)
+- Stack:
+  - `Frontend` React, TypeScript, Sass, Styled-components, Redux/toolkit, Swiper,
+  - `Backend` Node.js, Express.js
+    
+# How to run the app locally?
+- Clone the repository to your local machine
+- Install the dependances `yarn install`
+- Build the app `yarn run build` and run the app on host `3000` 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+_______________________________________________________________
+# More:
 
 ## Available Scripts
 
