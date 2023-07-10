@@ -1,3 +1,10 @@
+#Create by `create-react-app`
+
+# How to run the app locally?
+- Clone the repository to your local machine
+- Install the dependances `yarn install`
+- Build the app `yarn run build` and run the app on host `3000`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
