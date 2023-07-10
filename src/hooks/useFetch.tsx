@@ -9,7 +9,7 @@ import { Endpoints } from 'utils';
 function useFetch() {
     const { events } = useSelector(selectEvents);
     const [loading, setLoading] = useState<boolean>(events.length === 0);
-    const [message, setMessage] = useState<null | { status: number, message: string }>(null)
+    const [message, setMessage] = useState<null | { status: number, message: string }>(null);
     const url = Endpoints.getEvents;
     const dispatch = useAppDispatch();
 

@@ -1,28 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CategoryButton, SwiperElement, Loader, ICON } from "components";
 import { CSSTransition } from "react-transition-group";
+import { CategoryButton, SwiperElement, Loader, ICON } from "components";
 import "styles/transition.scss";
 import "styles/home.scss";
 import { useSelector } from "react-redux";
-import { selectEvents, selectEventsByFilter, setActiveCategory, useAppDispatch } from "store";
-import { useFetch } from "hooks";
-import { CategoryTypes } from "types";
+import { selectEventsByFilters, setActiveCategory, useAppDispatch } from "store";
 import { categories } from "utils/categories";
+import { CategoryTypes } from "types";
+import { useFetch } from "hooks";
 
 
 export default function HomePage(): JSX.Element {
-    const { activeCategory } = useSelector(selectEvents)
     const { loading } = useFetch();
-    const [startYear, setStartYear] = useState<number>(2016);
-    const [endYear, setEndYear] = useState<number>(2021);
+    const { events, activeCategory } = useSelector(selectEventsByFilters)
+    const [startYear, setStartYear] = useState<number>(2015);
+    const [endYear, setEndYear] = useState<number>(2022);
     const [inProp, setInProp] = useState(false);
     const dispatch = useAppDispatch();
     const [degree, setDegree] = useState<number>(
         360 - (360 / categories.length) * categories.length + 360 / categories.length
     );
     const nodeRef = useRef(null); //to avoid defaulting to ReactDOM.findDOMNode, which is deprecated in StrictMode 
-    const events = useSelector(selectEventsByFilter);
-
     const getCategoryButtonDegree = ({ index }: { index: number }): number => {
         if (index === 0) return degree
         let newDegree = degree;
@@ -112,18 +110,18 @@ export default function HomePage(): JSX.Element {
                             </button>
                         </div>
                     </div>
-                    <div className={"card__swiper"}>
+                    <div className={"card__swiper"}> 
                         {events.length > 0 && <CSSTransition
                             nodeRef={nodeRef}
                             timeout={300}
                             in={inProp}
                             classNames={"card__swiper"}
                         >
-                            {activeCategory && (
-                                <div ref={nodeRef} className="card__swiper__wrapper">
-                                    <SwiperElement events={events} />
-                                </div>
-                            )}
+                        {activeCategory && (
+                            <div ref={nodeRef} className="card__swiper__wrapper">
+                                <SwiperElement events={events} />
+                            </div>
+                        )}
                         </CSSTransition>}
                     </div>
                 </div>

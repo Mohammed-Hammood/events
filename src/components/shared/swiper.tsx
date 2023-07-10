@@ -1,6 +1,6 @@
 import React from "react";
-import { FreeMode, Navigation, Pagination, EffectFade } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Pagination, EffectFade } from "swiper";
 import { EventTypes } from "types";
 import { Event } from "components";
 import "swiper/css";
