@@ -1,12 +1,12 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { CategoryButton, SwiperElement, Loader, ICON } from "components";
-import "styles/home.scss";
 import { useSelector } from "react-redux";
 import { selectEventsByFilters, setActiveCategory, useAppDispatch } from "store";
 import { categories } from "utils/categories";
 import { CategoryTypes } from "types";
 import { useFetch } from "hooks";
 import { gsap } from 'gsap';
+import "styles/home.scss";
 
 
 export default function HomePage(): JSX.Element {
@@ -15,21 +15,29 @@ export default function HomePage(): JSX.Element {
     const [startYear, setStartYear] = useState<number>(2015);
     const [endYear, setEndYear] = useState<number>(2022);
     const dispatch = useAppDispatch();
+   
     const [degree, setDegree] = useState<number>(
         360 - (360 / categories.length) * categories.length + 360 / categories.length
     );
     const nodeRef = useRef<HTMLDivElement>(null); 
+   
     const tl = useRef<GSAPTimeline>();
 
     const getCategoryButtonDegree = ({ index }: { index: number }): number => {
-        if (index === 0) return degree
+
+        if (index === 0) return degree;
+
         let newDegree = degree;
+        
         for (let i = 0; i < index; i++) {
             newDegree += 356 / categories.length;
         }
+        
         return newDegree;
     }
     const shiftCategory = (direction: "prev" | "next"): void => {
+        // 1 = next category
+        // -1 = previous category
         const index = direction === 'next' ? 1 : -1;
         const category = categories.find(item => item.id === (activeCategory.id + index));
         if (category) {
@@ -44,7 +52,7 @@ export default function HomePage(): JSX.Element {
             const time = 300 / Math.abs(startY - startYear);
 
             let interval = setTimeout(() => {
-                //keeps updating the start and end years untill they because equals to activeCategory years.
+                //keeps updating the start and end years untill they become equal to start and end years of activeCategory .
                 if (startY !== startYear) setStartYear(y => y > startY ? y - 1 : y + 1);
 
                 if (endY !== endYear) setEndYear(y => y > endY ? y - 1 : y + 1);

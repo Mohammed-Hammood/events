@@ -1,5 +1,7 @@
 import { Category, CategoryTypes } from "types";
 
+
+// You can add more Categories but the ids would be sequentially e.g. 1, 2, 3, 4, 5, 6, 7, ... 
 export const categories:CategoryTypes[] = [
     {
         id:1,
