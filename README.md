@@ -3,7 +3,7 @@
 - React app fetches events from API in Express.js
 - The app is deployed on [https://events-history.vercel.app](https://events-history.vercel.app)
 - Stack:
-  - `Frontend` React, TypeScript, Sass, Styled-components, Redux/toolkit, Swiper,
+  - `Frontend` React, TypeScript, Sass, Styled-components, Redux/toolkit, Swiper, GSAP
   - `Backend` Node.js, Express.js
     
 # How to run the app locally?
