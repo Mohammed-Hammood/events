@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { CategoryButton, SwiperElement, Loader, ICON } from "components";
 import { useSelector } from "react-redux";
-import { selectEventsByFilters, setActiveCategory, useAppDispatch } from "store";
+import {  selectEventsByFilters, setActiveCategory, useAppDispatch } from "store";
 import { categories } from "utils/categories";
 import { CategoryTypes } from "types";
 import { useFetch } from "hooks";
@@ -11,16 +11,16 @@ import "styles/home.scss";
 
 export default function HomePage(): JSX.Element {
     const { loading } = useFetch();
-    const { events, activeCategory } = useSelector(selectEventsByFilters)
+    const { events, activeCategory } = useSelector(selectEventsByFilters);
     const [startYear, setStartYear] = useState<number>(2015);
     const [endYear, setEndYear] = useState<number>(2022);
     const dispatch = useAppDispatch();
-   
+
     const [degree, setDegree] = useState<number>(
         360 - (360 / categories.length) * categories.length + 360 / categories.length
     );
-    const nodeRef = useRef<HTMLDivElement>(null); 
-   
+    const nodeRef = useRef<HTMLDivElement>(null);
+
     const tl = useRef<GSAPTimeline>();
 
     const getCategoryButtonDegree = ({ index }: { index: number }): number => {
@@ -28,19 +28,22 @@ export default function HomePage(): JSX.Element {
         if (index === 0) return degree;
 
         let newDegree = degree;
-        
+
         for (let i = 0; i < index; i++) {
             newDegree += 356 / categories.length;
         }
-        
+
         return newDegree;
     }
     const shiftCategory = (direction: "prev" | "next"): void => {
         // 1 = next category
         // -1 = previous category
         const index = direction === 'next' ? 1 : -1;
+        
         const category = categories.find(item => item.id === (activeCategory.id + index));
+
         if (category) {
+
             dispatch(setActiveCategory({ category }));
         }
     }
@@ -79,7 +82,7 @@ export default function HomePage(): JSX.Element {
                     .to([".swiper-wrapper", ".CategoryNameMobileOnly"], { opacity: 1, duration: 1, delay: 10, y: 0 })
 
             }, nodeRef)
-            
+
             return () => ctx.revert();
         }
 
@@ -113,7 +116,6 @@ export default function HomePage(): JSX.Element {
                                 })}
                             </div>
                         </div>
-
                     </div>
 
                     <div className={"card__events"}>

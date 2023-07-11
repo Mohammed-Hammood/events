@@ -17,7 +17,7 @@ main {
 
         .card {
             height: 100%;
-         //   margin-top: 170px;
+            margin-top: 170px;
             display: flex;
             flex-direction: column;
 
@@ -111,7 +111,7 @@ main {
                     }
                 }
 
-               
+
             }
 
 
@@ -172,11 +172,13 @@ main {
             &__swiper {
                 padding: 0 70px;
                 margin-top: 56px;
+                min-height: 222px;
 
                 &__wrapper {
                     .CategoryNameMobileOnly {
                         display: none;
                     }
+
                     .swiperConteiner {
                         padding: 0 60px;
                         margin-bottom: 100px;
@@ -253,7 +255,7 @@ main {
 
             }
 
-           
+
         }
 
 
@@ -292,16 +294,12 @@ main {
                     font-size: 17px;
                     font-weight: bold;
                 }
+
                 .swiper-pagination-clickable,
                 .swiper-pagination-bullet {
                     display: flex;
                 }
-                // .swiper-slide-active {
-                //     max-width: 252px;
-                // }
-                // .swiper-slide-next {
-                //     opacity: 0.4;
-                // }
+
                 .swiper-pagination-horizontal {
                     position: fixed;
                     bottom: 50px;
@@ -309,8 +307,8 @@ main {
                     display: flex;
                     gap: 5px;
                 }
+            }
         }
-    }
 
-}
+    }
 }

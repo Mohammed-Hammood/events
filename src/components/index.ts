@@ -1,12 +1,10 @@
-import App from "./app/App";
-import SwiperElement from "./shared/swiper";
-import CategoryButton from "./shared/category-btn";
-import ICON from "./shared/icons";
-import Loader from "./shared/loader";
-import Event from "./shared/event";
+import SwiperElement from "./swiper";
+import CategoryButton from "./category-btn";
+import ICON from "./icons";
+import Loader from "./loader";
+import Event from "./event";
 
 export {
-    App,
     Loader,
     ICON,
     Event,
