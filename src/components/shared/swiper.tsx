@@ -14,6 +14,7 @@ interface SwiperProps {
 }
 
 const SwiperElement = ({ events }: SwiperProps) => {
+
 	return (
 		<Swiper
 			breakpoints={{
@@ -25,8 +26,8 @@ const SwiperElement = ({ events }: SwiperProps) => {
 					},
 				},
 				768: {
-					slidesPerView: 2,
 					spaceBetween: 10,
+					slidesPerView: 2,
 					pagination: {
 						type: "custom",
 					},
@@ -43,7 +44,7 @@ const SwiperElement = ({ events }: SwiperProps) => {
 			grabCursor
 			navigation
 			modules={[FreeMode, Navigation, Pagination, EffectFade]}
-			className={"swiperConteiner"}
+			className={"card__swiper"}
 		>
 			{events.map(item => {
 				return (

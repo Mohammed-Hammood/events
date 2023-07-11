@@ -1,13 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { CSSTransition } from "react-transition-group";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { CategoryButton, SwiperElement, Loader, ICON } from "components";
-import "styles/transition.scss";
 import "styles/home.scss";
 import { useSelector } from "react-redux";
 import { selectEventsByFilters, setActiveCategory, useAppDispatch } from "store";
 import { categories } from "utils/categories";
 import { CategoryTypes } from "types";
 import { useFetch } from "hooks";
+import { gsap } from 'gsap';
 
 
 export default function HomePage(): JSX.Element {
@@ -15,12 +14,13 @@ export default function HomePage(): JSX.Element {
     const { events, activeCategory } = useSelector(selectEventsByFilters)
     const [startYear, setStartYear] = useState<number>(2015);
     const [endYear, setEndYear] = useState<number>(2022);
-    const [inProp, setInProp] = useState(false);
     const dispatch = useAppDispatch();
     const [degree, setDegree] = useState<number>(
         360 - (360 / categories.length) * categories.length + 360 / categories.length
     );
-    const nodeRef = useRef(null); //to avoid defaulting to ReactDOM.findDOMNode, which is deprecated in StrictMode 
+    const nodeRef = useRef<HTMLDivElement>(null); 
+    const tl = useRef<GSAPTimeline>();
+
     const getCategoryButtonDegree = ({ index }: { index: number }): number => {
         if (index === 0) return degree
         let newDegree = degree;
@@ -44,7 +44,7 @@ export default function HomePage(): JSX.Element {
             const time = 300 / Math.abs(startY - startYear);
 
             let interval = setTimeout(() => {
-
+                //keeps updating the start and end years untill they because equals to activeCategory years.
                 if (startY !== startYear) setStartYear(y => y > startY ? y - 1 : y + 1);
 
                 if (endY !== endYear) setEndYear(y => y > endY ? y - 1 : y + 1);
@@ -58,10 +58,24 @@ export default function HomePage(): JSX.Element {
         const r = 389.4 - (358 / categories.length) * activeCategory.id + (358 / categories.length);
         setDegree(r);
 
-        setInProp(false)
 
-    }, [inProp, setInProp, events, startYear, activeCategory, endYear, setEndYear, setStartYear, setDegree]);
+    }, [events, startYear, activeCategory, endYear, setEndYear, setStartYear, setDegree]);
 
+    useLayoutEffect(() => {
+        // if condition to avoid fix the warning in console because useLayoutEffect is executed before the DOM is painted. 
+        if (document.querySelector('.swiper-wrapper')) {
+
+            let ctx = gsap.context(() => {
+                tl.current = gsap.timeline()
+                    .from([".swiper-wrapper", ".CategoryNameMobileOnly"], { opacity: 0, duration: 1, y: 20 })
+                    .to([".swiper-wrapper", ".CategoryNameMobileOnly"], { opacity: 1, duration: 1, delay: 10, y: 0 })
+
+            }, nodeRef)
+            
+            return () => ctx.revert();
+        }
+
+    }, [events])
     if (loading) return (<Loader size={100} />)
     return (
         <main>
@@ -91,9 +105,7 @@ export default function HomePage(): JSX.Element {
                                 })}
                             </div>
                         </div>
-                        <div className="card__body__activeCategoryMobile">
-                            {activeCategory.name}
-                        </div>
+
                     </div>
 
                     <div className={"card__events"}>
@@ -110,19 +122,13 @@ export default function HomePage(): JSX.Element {
                             </button>
                         </div>
                     </div>
-                    <div className={"card__swiper"}> 
-                        {events.length > 0 && <CSSTransition
-                            nodeRef={nodeRef}
-                            timeout={300}
-                            in={inProp}
-                            classNames={"card__swiper"}
-                        >
-                        {activeCategory && (
-                            <div ref={nodeRef} className="card__swiper__wrapper">
-                                <SwiperElement events={events} />
+                    <div className={"card__swiper"}>
+                        <div ref={nodeRef} className="card__swiper__wrapper">
+                            <div className="CategoryNameMobileOnly">
+                                {activeCategory.name}
                             </div>
-                        )}
-                        </CSSTransition>}
+                            <SwiperElement events={events} />
+                        </div>
                     </div>
                 </div>
             </div>

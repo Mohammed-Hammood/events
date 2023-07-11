@@ -17,7 +17,7 @@ main {
 
         .card {
             height: 100%;
-            margin-top: 170px;
+         //   margin-top: 170px;
             display: flex;
             flex-direction: column;
 
@@ -111,9 +111,7 @@ main {
                     }
                 }
 
-                &__activeCategoryMobile {
-                    display: none;
-                }
+               
             }
 
 
@@ -176,7 +174,9 @@ main {
                 margin-top: 56px;
 
                 &__wrapper {
-
+                    .CategoryNameMobileOnly {
+                        display: none;
+                    }
                     .swiperConteiner {
                         padding: 0 60px;
                         margin-bottom: 100px;
@@ -253,15 +253,7 @@ main {
 
             }
 
-            &__activeCategoryMobile {
-                display: flex;
-                border-bottom: 2px solid rgba(199, 205, 217, 0.5);
-                margin: 0 20px;
-                color: var(--darkBlue);
-                padding-bottom: 20px;
-                font-size: 17px;
-                font-weight: bold;
-            }
+           
         }
 
 
@@ -288,27 +280,35 @@ main {
 
         &__swiper {
             padding: 10px;
-            margin: 0 10px;
+            margin: 0;
 
             &__wrapper {
-
+                .CategoryNameMobileOnly {
+                    display: flex;
+                    border-bottom: 2px solid rgba(199, 205, 217, 0.5);
+                    margin: 10px;
+                    color: var(--darkBlue);
+                    padding-bottom: 20px;
+                    font-size: 17px;
+                    font-weight: bold;
+                }
                 .swiper-pagination-clickable,
                 .swiper-pagination-bullet {
                     display: flex;
                 }
-                
-                .swiperConteiner {
-                    padding: 0;
-                    
-                    .swiper-pagination {
-                        position: fixed;
-                        bottom: 50px;
-                    }
-                    
-                    .swiper-pagination-clickable {
-                        display: flex;
-                    }
-            }
+                // .swiper-slide-active {
+                //     max-width: 252px;
+                // }
+                // .swiper-slide-next {
+                //     opacity: 0.4;
+                // }
+                .swiper-pagination-horizontal {
+                    position: fixed;
+                    bottom: 50px;
+                    justify-content: center;
+                    display: flex;
+                    gap: 5px;
+                }
         }
     }
 
