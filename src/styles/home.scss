@@ -173,11 +173,27 @@ main {
                 padding: 0 70px;
                 margin-top: 56px;
                 min-height: 222px;
-                .swiper-button-next, .swiper-button-prev {
+
+                .swiper-button-next,
+                .swiper-button-prev {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    width: 40px;
+                    height: 40px;
+                    background: #ffffff;
+                    box-shadow: 0px 0px 15px rgba(56, 119, 238, 0.1);
+                    border-radius: 50%;
+
+                    &::after {
+                        font-size: 15px;
+                        color: #3877ee;
+                    }
                 }
+                .swiper-button-disabled {
+                    display: none;
+                }
+
                 &__wrapper {
                     .CategoryNameMobileOnly {
                         display: none;
@@ -298,13 +314,17 @@ main {
                     font-size: 17px;
                     font-weight: bold;
                 }
-
+                .swiper-button-next,
+                .swiper-button-prev {
+                    display: none;
+                }
                 .swiper-pagination-clickable,
                 .swiper-pagination-bullet {
                     display: flex;
                 }
+
                 .swiper-pagination-bullet {
-                    height:10px;
+                    height: 10px;
                     width: 10px;
                 }
 
