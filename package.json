@@ -1,5 +1,5 @@
 {
-  "name": "test-only",
+  "name": "history-of-events",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.2.6",
     "@types/styled-components": "^5.1.26",
     "gsap": "^3.12.2",
+    "identity-obj-proxy": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
@@ -28,7 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -50,8 +51,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "^7.22.7",
     "@babel/preset-typescript": "^7.22.5",
     "@types/react-transition-group": "^4.4.6",
+    "react-test-renderer": "^18.2.0",
     "sass": "^1.63.4"
   }
 }

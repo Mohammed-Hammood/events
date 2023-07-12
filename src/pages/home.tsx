@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { CategoryButton, SwiperElement, Loader, ICON } from "components";
 import { useSelector } from "react-redux";
-import {  selectEventsByFilters, setActiveCategory, useAppDispatch } from "store";
+import { selectEventsByFilters, setActiveCategory, useAppDispatch } from "store";
 import { categories } from "utils/categories";
 import { CategoryTypes } from "types";
 import { useFetch } from "hooks";
@@ -19,9 +19,10 @@ export default function HomePage(): JSX.Element {
     const [degree, setDegree] = useState<number>(
         360 - (360 / categories.length) * categories.length + 360 / categories.length
     );
+
     const nodeRef = useRef<HTMLDivElement>(null);
 
-    const tl = useRef<GSAPTimeline>();
+    const tl = useRef<GSAPTimeline>(); // timeline 
 
     const getCategoryButtonDegree = ({ index }: { index: number }): number => {
 
@@ -39,7 +40,7 @@ export default function HomePage(): JSX.Element {
         // 1 = next category
         // -1 = previous category
         const index = direction === 'next' ? 1 : -1;
-        
+
         const category = categories.find(item => item.id === (activeCategory.id + index));
 
         if (category) {
@@ -87,7 +88,6 @@ export default function HomePage(): JSX.Element {
         }
 
     }, [events])
-    if (loading) return (<Loader size={100} />)
     return (
         <main>
             <div className="center-content">
@@ -124,10 +124,16 @@ export default function HomePage(): JSX.Element {
                             {categories.length < 10 ? `0${categories.length}` : categories.length}
                         </div>
                         <div className={"card__events__sliderButtons"}>
-                            <button disabled={activeCategory.id === 1} onClick={() => shiftCategory('prev')} >
+                            <button
+                                disabled={activeCategory.id === 1}
+                                onClick={() => shiftCategory('prev')}
+                            >
                                 <ICON name="angle-left" />
                             </button>
-                            <button disabled={activeCategory.id === categories.length} onClick={() => shiftCategory('next')}>
+                            <button
+                                disabled={activeCategory.id === categories.length}
+                                onClick={() => shiftCategory('next')}
+                            >
                                 <ICON name="angle-right" />
                             </button>
                         </div>
@@ -137,7 +143,7 @@ export default function HomePage(): JSX.Element {
                             <div className="CategoryNameMobileOnly">
                                 {activeCategory.name}
                             </div>
-                            <SwiperElement events={events} />
+                            {loading ? <Loader size={80} /> : <SwiperElement events={events} />}
                         </div>
                     </div>
                 </div>

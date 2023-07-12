@@ -1,13 +1,9 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation, Pagination, EffectFade } from "swiper";
+import { Navigation, Pagination, EffectFade } from "swiper";
 import { EventTypes } from "types";
 import { Event } from "components";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
+ 
 
 interface SwiperProps {
 	events: EventTypes[];
@@ -43,7 +39,7 @@ const SwiperElement = ({ events }: SwiperProps) => {
 			pagination
 			grabCursor
 			navigation
-			modules={[FreeMode, Navigation, Pagination, EffectFade]}
+			modules={[Navigation, Pagination, EffectFade]}
 			className={"card__swiper"}
 		>
 			{events.map(item => {

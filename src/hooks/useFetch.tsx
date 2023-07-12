@@ -1,13 +1,14 @@
 
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { selectEvents, setEvents, useAppDispatch } from 'store';
 import { Endpoints } from 'utils';
 
 
-function useFetch() {
+function useFetch() { 
     const { events } = useSelector(selectEvents);
+    const firstLoad = useRef<boolean>(true);
     const [loading, setLoading] = useState<boolean>(events.length === 0);
     const [message, setMessage] = useState<null | { status: number, message: string }>(null);
     const url = Endpoints.getEvents;
@@ -15,6 +16,7 @@ function useFetch() {
 
     useEffect(() => {
         const sendRequest = async (url: string): Promise<void> => {
+            setLoading(true);
             try {
                 const req = await fetch(url);
 
@@ -28,10 +30,10 @@ function useFetch() {
                 setLoading(false);
             }
         }
-        if (events.length === 0) {
-            setLoading(true);
+        if (events.length === 0 && firstLoad.current) {
             setMessage(null);
             sendRequest(url);
+            firstLoad.current = false;
         }
     }, [dispatch, url, loading, message, setLoading, events])
     return {

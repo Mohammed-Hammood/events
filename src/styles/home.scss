@@ -173,7 +173,11 @@ main {
                 padding: 0 70px;
                 margin-top: 56px;
                 min-height: 222px;
-
+                .swiper-button-next, .swiper-button-prev {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
                 &__wrapper {
                     .CategoryNameMobileOnly {
                         display: none;
@@ -298,6 +302,10 @@ main {
                 .swiper-pagination-clickable,
                 .swiper-pagination-bullet {
                     display: flex;
+                }
+                .swiper-pagination-bullet {
+                    height:10px;
+                    width: 10px;
                 }
 
                 .swiper-pagination-horizontal {

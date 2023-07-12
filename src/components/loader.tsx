@@ -9,21 +9,21 @@ const LoaderWrapper = styled.div<Props>`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-repeat: no-repeat;
-    background: linear-gradient(to bottom, var(--fuchia80), var(--darkBlue));
     outline:none;
+    background:transparent;
     border:none;
     cursor:wait;
-    position: fixed;
+    position: relative;
     height: 100%;
     width: 100%;
+    min-height: 222px;
     border-radius:0px;
     &::after {
         content:"";
         width:${props => props.$size + "px"};
         height:${props => props.$size + "px"};
         border: 3px solid white;
-        border-top: 3px solid red;
+        border-top: 3px solid #007aff;
         border-radius: 50%;
         animation: Loader 1s linear infinite;
     }

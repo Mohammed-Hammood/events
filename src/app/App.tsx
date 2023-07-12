@@ -5,6 +5,7 @@ function App() {
 	return (
 		<>
 			<Pages />
+			{/* Here can add footer, header and other layouts */}
 		</>
 	);
 }
