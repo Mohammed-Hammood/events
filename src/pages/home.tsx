@@ -50,7 +50,7 @@ export default function HomePage(): JSX.Element {
     }
     useEffect(() => {
         const updateYears = () => {
-            //destruct the useRef hook which saves the start and end events years.
+            
             const { startYear: startY, endYear: endY } = activeCategory;
 
             const time = 300 / Math.abs(startY - startYear);
